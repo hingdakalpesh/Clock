@@ -4,83 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>A Digital Analog Clock</title>
-    
-    <style>
-        /* Layout */
-        body{
-
-            background-color: #94908f;
-        }
-        .main {
-            display: flex;
-            padding: 2em;
-            height: 90vh;
-            justify-content: center;
-            align-items: middle;
-        }
-
-        .clockbox,
-        #clock {
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            background-color: #413d3c;
-        }
-
-        /* Clock styles */
-        .circle {
-            fill: none;
-            stroke: #312f30;
-            stroke-width: 5;
-            stroke-miterlimit: 10;
-        }
-
-        .mid-circle {
-            fill: #efefef;
-        }
-
-        .hour-marks {
-            fill: none;
-            stroke: #b4a48b;
-            stroke-width: 4;
-            stroke-miterlimit: 10;
-        }
-
-        .hour-arm {
-            fill: none;
-            stroke: #efefef;
-            stroke-width: 11;
-            stroke-miterlimit: 10;
-        }
-
-        .minute-arm {
-            fill: none;
-            stroke: #efefef;
-            stroke-width: 11;
-            stroke-miterlimit: 10;
-        }
-
-        .second-arm {
-            fill: none;
-            stroke: #efefef;
-            stroke-width: 4;
-            stroke-miterlimit: 10;
-        }
-
-        /* Transparent box ensuring arms center properly. */
-        .sizing-box {
-            fill: none;
-        }
-
-        /* Make all arms rotate around the same center point. */
-        /* Optional: Use transition for animation. */
-        #hour,
-        #minute,
-        #second {
-            transform-origin: 300px 300px;
-        }
-    </style>
+    <title>Clock Visualiser</title>
+    <link rel="stylesheet" href="style.css" type="text/css" media="all">
+    <script src="Script.js" defer></script>
 </head>
 
 <body>
@@ -107,31 +33,54 @@
                 </g>
             </svg>
         </div><!-- .clockbox -->
+        <br>
+        <div style="display: flex">
+            <table>
+                <tr>
+                    <td>
+                        <label for="colorpicker-wall">Wall colour:</label>
+                    </td>
+                    <td>
+                        <input type="color" id="colorpicker-wall" value="#94908f" onchange="changeWallColor()">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="colorpicker-clock">Clock colour:</label>
+                    </td>
+                    <td>
+                        <input type="color" id="colorpicker-clock" value="#312f30" onchange="changeClockColor()">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="colorpicker-hands">Hands colour:</label>
+                    </td>
+                    <td>
+                        <input type="color" id="colorpicker-hands" value="#efefef" onchange="changeHandsColor()">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="colorpicker-hourmarks">Hour-marks colour:</label>
+                    </td>
+                    <td>
+                        <input type="color" id="colorpicker-hourmarks" value="#b4a48b"
+                            onchange="changeHourMarksColor()">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="colorpicker-midcircle">Mid-dial colour:</label>
+                    </td>
+                    <td>
+                        <input type="color" id="colorpicker-midcircle" value="#efefef"
+                            onchange="changeMidCircleColor()">
+                    </td>
+                </tr>
+            </table>
     </main>
 
 </body>
-
-<script>
-    const HOURHAND = document.querySelector("#hour");
-    const MINUTEHAND = document.querySelector("#minute");
-    const SECONDHAND = document.querySelector("#second");
-    function runTheClock() {
-        var date = new Date();
-        //console.log(date);
-        let hr = date.getHours();
-        let min = date.getMinutes();
-        let sec = date.getSeconds();
-        //console.log("Hour: " + hr + " Minute: " + min + " Second: " + sec);
-
-        let hrPosition = (hr * 360 / 12) + (min * (360 / 60) / 12);
-        let minPosition = (min * 360 / 60) + (sec * (360 / 60) / 60);
-        let secPosition = sec * 360 / 60;
-
-        HOURHAND.style.transform = "rotate(" + hrPosition + "deg)";
-        MINUTEHAND.style.transform = "rotate(" + minPosition + "deg)";
-        SECONDHAND.style.transform = "rotate(" + secPosition + "deg)";
-    }
-    var interval = setInterval(runTheClock, 1000);
-</script>
 
 </html>
